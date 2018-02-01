@@ -17,15 +17,25 @@ STRING13=""
 STRING14="Wallet Configured"
 STRING15="Installing Sentinel"
 STRING16="Credit to MasterHash for source material: https://github.com/masterhash-us/"
+STRING17="Gathering Masternode Data"
+STRING18="Installing Tincoin"
 
 #print variable on a screen
 echo $STRING16
 echo $STRING1
 
-read -e -p "Server IP Address : " ip
-read -e -p "Masternode Private Key (e.g. 7edfjLCUzGczZi3JQw8GHp434R9kNY33eFyMGeKRymkB56G4324h # THE KEY YOU GENERATED EARLIER) : " key
-read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
-read -e -p "Install UFW and configure ports? [Y/n] : " UFW
+read -e -p "Install Tincoin? [Y/n]: " tinc
+read -e -p "Configure Masternode? [Y/n]: " mNode
+read -e -p "Configure Sentinel? [Y/n]: " sen
+
+echo $STRING17
+    if [[ ("$mNode" == "y" || "$mNode" == "Y" || "$mNode" == "") ]]; then
+		read -e -p "Server IP Address: " ip
+		read -e -p "Masternode Private Key (e.g. 7edfjLCUzGczZi3JQw8GHp434R9kNY33eFyMGeKRymkB56G4324h # THE KEY YOU GENERATED EARLIER) : " key
+		read -e -p "Install Fail2ban? [Y/n]: " install_fail2ban
+		read -e -p "Install UFW and configure ports? [Y/n]: " UFW 
+    fi
+
 
 clear
 echo $STRING2
@@ -60,28 +70,31 @@ echo $STRING6
     sudo ufw default deny incoming
     sudo ufw default allow outgoing
     sudo ufw allow ssh
-    sudo ufw allow 52543/tcp
+    sudo ufw allow 9859/tcp
     sudo ufw enable -y
     fi
 
 #Install Tincoin Daemon
-sudo apt-get install git
-git clone https://github.com/tincoinpay/tincoin.git
-sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils
-sudo apt install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
-sudo add-apt-repository ppa:bitcoin/bitcoin
-sudo apt-get update
-sudo apt-get install libdb4.8-dev libdb4.8++-dev
-sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-sudo apt-get install libminiupnpc-dev
-sudo apt-get install libzmq3-dev
-sudo apt-get install libqrencode-dev
-cd tincoin
-./autogen.sh
-./configure
-make
-tincoind -daemon
-clear
+echo $STRING18
+    if [[ ("$tinc" == "y" || "$tinc" == "Y" || "$tinc" == "") ]]; then
+		cd
+		git clone https://github.com/tincoinpay/tincoin.git
+		sudo apt-get install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils
+		sudo apt install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+		sudo add-apt-repository ppa:bitcoin/bitcoin
+		sudo apt-get update
+		sudo apt-get install libdb4.8-dev libdb4.8++-dev
+		sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+		sudo apt-get install libminiupnpc-dev
+		sudo apt-get install libzmq3-dev
+		sudo apt-get install libqrencode-dev
+		cd tincoin
+		./autogen.sh
+		./configure
+		make
+		tincoind -daemon
+		clear
+	fi
 
 #Setting up coin
 clear
@@ -93,6 +106,7 @@ echo $STRING4
 sleep 10
 
 #Create tincoin.conf
+    if [[ ("$mNode" == "y" || "$mNode" == "Y" || "$mNode" == "") ]]; then
 echo '
 rpcuser='$password'
 rpcpassword='$password2'
@@ -109,11 +123,11 @@ masternodeprivkey='$key'
 masternode=1
 ' | sudo -E tee ~/.tincoincore/tincoin.conf >/dev/null 2>&1
 sudo chmod 0600 ~/.tincoincore/tincoin.conf
-
 echo $STRING14
-echo $STRING15
+	fi
 
-cd
+if [[ ("$sen" == "y" || "$sen" == "Y" || "$sen" == "") ]]; then
+echo $STRING15
 cd
 cd .tincoincore   
 if ./tincoin-cli stop; then
@@ -190,3 +204,4 @@ sleep 60
 read -p "Press any key to continue... " -n1 -s
 tincoin-cli startmasternode local false
 tincoin-cli masternode status
+fi
