@@ -44,8 +44,8 @@ echo $STRING5
 sudo apt-get -y install aptitude
 
 #Generating Random Passwords
-password = `cat / dev / urandom | tr - dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
-password2 = `cat / dev / urandom | tr - dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
+password=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
+password2=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
 echo $STRING6
 if[[("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "")]]; then
@@ -92,19 +92,19 @@ sleep 10
 
 #Create tincoin.conf
 echo '
-rpcuser = '$password'
-rpcpassword = '$password2'
-rpcallowip = 127.0.0.1
-listen = 1
-server = 1
-daemon = 1
-logtimestamps = 1
-maxconnections = 256
-externalip = '$ip'
-bind = '$ip':9859
-masternodeaddr = '$ip'
-masternodeprivkey = '$key'
-masternode = 1
+rpcuser='$password'
+rpcpassword='$password2'
+rpcallowip=127.0.0.1
+listen=1
+server=1
+daemon=1
+logtimestamps=1
+maxconnections=256
+externalip='$ip'
+bind='$ip':9859
+masternodeaddr='$ip'
+masternodeprivkey='$key'
+masternode=1
 ' | sudo -E tee ~/.tincoin/tincoin.conf >/dev/null 2>&1
 sudo chmod 0600 ~/.tincoin/tincoin.conf
 
