@@ -1,22 +1,22 @@
 #!/bin/bash
 clear
 # declare STRING variable
-STRING1 = "Make sure you double check before hitting enter! Only one shot at these!"
-STRING2 = "If you found this helpful, please donate to TIN Donation: "
-STRING3 = "tFN4dBfDtczjGH11o7ps6NYWDczBMzyGBK"
-STRING4 = "Updating system and installing required packages."
-STRING5 = "Switching to Aptitude"
-STRING6 = "Some optional installs"
-STRING7 = "Starting your masternode"
-STRING8 = "Now, you need to finally start your masternode in the following order:"
-STRING9 = "Go to your windows wallet and from the Control wallet debug console please enter"
-STRING10 = "startmasternode alias false <mymnalias>"
-STRING11 = "where <mymnalias> is the name of your masternode alias (without brackets)"
-STRING12 = "once completed please return to VPS and press the space bar"
-STRING13 = ""
-STRING14 = "Wallet Configured"
-STRING15 = "Installing Sentinel"
-STRING16 = "Credit to MasterHash for source material: https://github.com/masterhash-us/"
+STRING1="Make sure you double check before hitting enter! Only one shot at these!"
+STRING2="If you found this helpful, please donate to TIN Donation: "
+STRING3="tFN4dBfDtczjGH11o7ps6NYWDczBMzyGBK"
+STRING4="Updating system and installing required packages."
+STRING5="Switching to Aptitude"
+STRING6="Some optional installs"
+STRING7="Starting your masternode"
+STRING8="Now, you need to finally start your masternode in the following order:"
+STRING9="Go to your windows wallet and from the Control wallet debug console please enter"
+STRING10="startmasternode alias false <mymnalias>"
+STRING11="where <mymnalias> is the name of your masternode alias (without brackets)"
+STRING12="once completed please return to VPS and press the space bar"
+STRING13=""
+STRING14="Wallet Configured"
+STRING15="Installing Sentinel"
+STRING16="Credit to MasterHash for source material: https://github.com/masterhash-us/"
 
 #print variable on a screen
 echo $STRING1
