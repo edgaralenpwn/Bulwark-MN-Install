@@ -106,8 +106,8 @@ bind='$ip':9859
 masternodeaddr='$ip'
 masternodeprivkey='$key'
 masternode=1
-' | sudo -E tee ~/.tincoin/tincoin.conf >/dev/null 2>&1
-sudo chmod 0600 ~/.tincoin/tincoin.conf
+' | sudo -E tee ~/.tincoincore/tincoin.conf >/dev/null 2>&1
+sudo chmod 0600 ~/.tincoincore/tincoin.conf
 
 echo $STRING14
 echo $STRING15
