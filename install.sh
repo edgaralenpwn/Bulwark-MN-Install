@@ -48,19 +48,19 @@ password=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 password2=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
 echo $STRING6
-if[[("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "")]]; then
-cd ~
-sudo aptitude -y install fail2ban
-sudo service fail2ban restart
-fi
-if[[("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "")]]; then
-sudo apt-get install ufw
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow ssh
-sudo ufw allow 9859 / tcp
-sudo ufw enable -y
-fi
+    if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
+    cd ~
+    sudo aptitude -y install fail2ban
+    sudo service fail2ban restart 
+    fi
+    if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
+    sudo apt-get install ufw
+    sudo ufw default deny incoming
+    sudo ufw default allow outgoing
+    sudo ufw allow ssh
+    sudo ufw allow 52543/tcp
+    sudo ufw enable -y
+    fi
 
 #Install Tincoin Daemon
 sudo apt-get install git
