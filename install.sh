@@ -64,7 +64,7 @@ echo $STRING6
 
 #Install Tincoin Daemon
 sudo apt-get install git
-git clone https ://github.com/tincoinpay/tincoin.git
+git clone https://github.com/tincoinpay/tincoin.git
 sudo apt-get install build - essential libtool autotools - dev automake pkg - config libssl - dev libevent - dev bsdmainutils
 sudo apt install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
 sudo add-apt-repository ppa:bitcoin/bitcoin
