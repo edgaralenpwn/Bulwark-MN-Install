@@ -35,6 +35,7 @@ echo $STRING4
 sleep 10
 
 # update package and upgrade Ubuntu
+cd
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
