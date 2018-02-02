@@ -11,3 +11,7 @@ Install & configure your desired master node with options:
 ```bash
 bash install.sh 
 ```
+To configure a cloned instance:
+```bash
+bash install_clone.sh 
+```
